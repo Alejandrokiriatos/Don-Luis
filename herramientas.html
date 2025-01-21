@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Herramientas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="styles.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+</head>
+<body>
+  <a href="cart.html" class="cart-icon">
+    <i class="fas fa-shopping-cart"></i>
+    <span id="cart-count" class="cart-count">0</span>
+  </a>
+
+  <div class="container">
+    <div class="header">
+      <h1>Herramientas</h1>
+      <div class="buttons-container">
+        <a href="index.html" class="back-button"><i class="fas fa-home"></i> Volver al Inicio</a>
+        <a href="https://wa.me/5355841127?text=Hola,%20me%20gustaría%20consultar%20sobre%20un%20tema%20diferente%20a%20los%20productos%20mostrados%20en%20la%20página.%20¿Podríamos%20conversar%20al%20respecto?" class="consult-button" target="_blank">
+          <i class="fab fa-whatsapp"></i> Consulta Externa
+        </a>
+      </div>
+    </div>
+
+    <div class="productos">
+      <div class="producto">
+        <img src="images/herramientas/atornilladora.jpg" alt="Atornilladora COOFIX" class="producto-imagen">
+        <div class="producto-nombre">ATORNILLADORA COOFIX</div>
+        <div class="producto-unidad">1 Unidad</div>
+        <div class="producto-precio">$13,000</div>
+        <div class="producto-descripcion">Atornilladora eléctrica profesional marca COOFIX, potente y durable.</div>
+        <button onclick="addToCart('ATORNILLADORA COOFIX', 13000, '1 Unidad')" class="add-to-cart">
+          <i class="fas fa-cart-plus"></i> Añadir al Carrito
+        </button>
+      </div>
+
+      <div class="producto">
+        <img src="images/herramientas/yale.jpg" alt="Yale" class="producto-imagen">
+        <div class="producto-nombre">YALE</div>
+        <div class="producto-unidad">1 Unidad</div>
+        <div class="producto-precio">$3,800</div>
+        <div class="producto-descripcion">Cerradura Yale de alta seguridad, resistente y duradera.</div>
+        <button onclick="addToCart('YALE', 3800, '1 Unidad')" class="add-to-cart">
+          <i class="fas fa-cart-plus"></i> Añadir al Carrito
+        </button>
+      </div>
+
+      <div class="producto">
+        <img src="images/herramientas/candado-plateado.jpg" alt="Candado Grande Plateado" class="producto-imagen">
+        <div class="producto-nombre">CANDADO GRANDE PLATEADO</div>
+        <div class="producto-unidad">1 Unidad</div>
+        <div class="producto-precio">$1,100</div>
+        <div class="producto-descripcion">Candado grande plateado de alta resistencia y seguridad.</div>
+        <button onclick="addToCart('CANDADO GRANDE PLATEADO', 1100, '1 Unidad')" class="add-to-cart">
+          <i class="fas fa-cart-plus"></i> Añadir al Carrito
+        </button>
+      </div>
+
+      <div class="producto">
+        <img src="images/herramientas/candado-bronce.jpg" alt="Candado Grande Bronce" class="producto-imagen">
+        <div class="producto-nombre">CANDADO GRANDE BRONCE</div>
+        <div class="producto-unidad">1 Unidad</div>
+        <div class="producto-precio">$800</div>
+        <div class="producto-descripcion">Candado grande de bronce, resistente a la corrosión.</div>
+        <button onclick="addToCart('CANDADO GRANDE BRONCE', 800, '1 Unidad')" class="add-to-cart">
+          <i class="fas fa-cart-plus"></i> Añadir al Carrito
+        </button>
+      </div>
+
+      <div class="producto">
+        <img src="images/herramientas/candado-mediano-bronce.jpg" alt="Candado Mediano Bronce" class="producto-imagen">
+        <div class="producto-nombre">CANDADO MEDIANO BRONCE</div>
+        <div class="producto-unidad">1 Unidad</div>
+        <div class="producto-precio">$650</div>
+        <div class="producto-descripcion">Candado mediano de bronce, ideal para uso general.</div>
+        <button onclick="addToCart('CANDADO MEDIANO BRONCE', 650, '1 Unidad')" class="add-to-cart">
+          <i class="fas fa-cart-plus"></i> Añadir al Carrito
+        </button>
+      </div>
+
+      <div class="producto">
+        <img src="images/herramientas/electrodo.jpg" alt="Electrodo Geca" class="producto-imagen">
+        <div class="producto-nombre">ELECTRODO GECA 3.2 MM</div>
+        <div class="producto-unidad">1 Unidad</div>
+        <div class="producto-precio">$35</div>
+        <div class="producto-descripcion">Electrodo Geca de 3.2 mm para soldadura eléctrica.</div>
+        <button onclick="addToCart('ELECTRODO GECA 3.2 MM', 35, '1 Unidad')" class="add-to-cart">
+          <i class="fas fa-cart-plus"></i> Añadir al Carrito
+        </button>
+      </div>
+
+      <div class="producto">
+        <img src="images/herramientas/expansion-mecanica.jpg" alt="Expansión Mecánica" class="producto-imagen">
+        <div class="producto-nombre">EXPANSIÓN MECÁNICA M-10 Ø 12 MM</div>
+        <div class="producto-unidad">1 Unidad</div>
+        <div class="producto-precio">$350</div>
+        <div class="producto-descripcion">Expansión mecánica M-10 de 12mm de diámetro.</div>
+        <button onclick="addToCart('EXPANSIÓN MECÁNICA M-10 Ø 12 MM', 350, '1 Unidad')" class="add-to-cart">
+          <i class="fas fa-cart-plus"></i> Añadir al Carrito
+        </button>
+      </div>
+
+      <div class="producto">
+        <img src="images/herramientas/disco-milhojas.jpg" alt="Disco Mil Hojas" class="producto-imagen">
+        <div class="producto-nombre">DISCO MIL HOJAS</div>
+        <div class="producto-unidad">1 Unidad</div>
+        <div class="producto-precio">$500</div>
+        <div class="producto-descripcion">Disco mil hojas para pulido y acabado de superficies.</div>
+        <button onclick="addToCart('DISCO MIL HOJAS', 500, '1 Unidad')" class="add-to-cart">
+          <i class="fas fa-cart-plus"></i> Añadir al Carrito
+        </button>
+      </div>
+
+      <div class="producto">
+        <img src="images/herramientas/disco-corte-grande.jpg" alt="Disco de Corte Grande" class="producto-imagen">
+        <div class="producto-nombre">DISCO DE CORTE GRANDE</div>
+        <div class="producto-unidad">1 Unidad</div>
+        <div class="producto-precio">$500</div>
+        <div class="producto-descripcion">Disco de corte grande para materiales duros.</div>
+        <button onclick="addToCart('DISCO DE CORTE GRANDE', 500, '1 Unidad')" class="add-to-cart">
+          <i class="fas fa-cart-plus"></i> Añadir al Carrito
+        </button>
+      </div>
+
+      <div class="producto">
+        <img src="images/herramientas/disco-corte-chico.jpg" alt="Disco de Corte Chiquito" class="producto-imagen">
+        <div class="producto-nombre">DISCO DE CORTE CHIQUITO</div>
+        <div class="producto-unidad">1 Unidad</div>
+        <div class="producto-precio">$160</div>
+        <div class="producto-descripcion">Disco de corte pequeño para trabajos de precisión.</div>
+        <button onclick="addToCart('DISCO DE CORTE CHIQUITO', 160, '1 Unidad')" class="add-to-cart">
+          <i class="fas fa-cart-plus"></i> Añadir al Carrito
+        </button>
+      </div>
+
+      <div class="producto">
+        <img src="images/herramientas/disco-desbaste.jpg" alt="Disco de Desbaste" class="producto-imagen">
+        <div class="producto-nombre">DISCO DE DESBASTE CHIQUITO</div>
+        <div class="producto-unidad">1 Unidad</div>
+        <div class="producto-precio">$500</div>
+        <div class="producto-descripcion">Disco de desbaste pequeño para trabajos de acabado.</div>
+        <button onclick="addToCart('DISCO DE DESBASTE CHIQUITO', 500, '1 Unidad')" class="add-to-cart">
+          <i class="fas fa-cart-plus"></i> Añadir al Carrito
+        </button>
+      </div>
+
+      <div class="producto">
+        <img src="images/herramientas/juego-destornilladores.jpg" alt="Juego de Destornilladores" class="producto-imagen">
+        <div class="producto-nombre">JUEGO DE DESTORNILLADOR TOTAL</div>
+        <div class="producto-unidad">1 Set</div>
+        <div class="producto-precio">$3,200</div>
+        <div class="producto-descripcion">Set completo de destornilladores Total, incluye diferentes tamaños y tipos.</div>
+        <button onclick="addToCart('JUEGO DE DESTORNILLADOR TOTAL', 3200, '1 Set')" class="add-to-cart">
+          <i class="fas fa-cart-plus"></i> Añadir al Carrito
+        </button>
+      </div>
+
+      <div class="producto">
+        <img src="images/herramientas/pinza-presion.jpg" alt="Pinza de Presión" class="producto-imagen">
+        <div class="producto-nombre">PINZA DE PRESIÓN</div>
+        <div class="producto-unidad">1 Unidad</div>
+        <div class="producto-precio">$2,500</div>
+        <div class="producto-descripcion">Pinza de presión profesional para agarre firme.</div>
+        <button onclick="addToCart('PINZA DE PRESIÓN', 2500, '1 Unidad')" class="add-to-cart">
+          <i class="fas fa-cart-plus"></i> Añadir al Carrito
+        </button>
+      </div>
+
+      <div class="producto">
+        <img src="images/herramientas/pinza-corte.jpg" alt="Pinza de Corte" class="producto-imagen">
+        <div class="producto-nombre">PINZA DE CORTE TOTAL</div>
+        <div class="producto-unidad">1 Unidad</div>
+        <div class="producto-precio">$1,800</div>
+        <div class="producto-descripcion">Pinza de corte marca Total para trabajos precisos.</div>
+        <button onclick="addToCart('PINZA DE CORTE TOTAL', 1800, '1 Unidad')" class="add-to-cart">
+          <i class="fas fa-cart-plus"></i> Añadir al Carrito
+        </button>
+      </div>
+
+      <div class="producto">
+        <img src="images/herramientas/cepillo-carpintero.jpg" alt="Cepillo de Carpintero" class="producto-imagen">
+        <div class="producto-nombre">CEPILLO DE CARPINTERO</div>
+        <div class="producto-unidad">1 Unidad</div>
+        <div class="producto-precio">$3,500</div>
+        <div class="producto-descripcion">Cepillo de carpintero profesional para trabajos de precisión en madera.</div>
+        <button onclick="addToCart('CEPILLO DE CARPINTERO', 3500, '1 Unidad')" class="add-to-cart">
+          <i class="fas fa-cart-plus"></i> Añadir al Carrito
+        </button>
+      </div>
+    </div>
+  </div>
+  <script src="cart.js"></script>
+</body>
+</html>

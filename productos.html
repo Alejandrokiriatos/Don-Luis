@@ -1,0 +1,285 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Productos del Mercado</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="styles.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+</head>
+<body>
+  <a href="cart.html" class="cart-icon">
+    <i class="fas fa-shopping-cart"></i>
+    <span id="cart-count" class="cart-count">0</span>
+  </a>
+
+  <div class="container">
+    <div class="header">
+      <h1>Productos del Mercado</h1>
+      <div class="buttons-container">
+        <a href="index.html" class="back-button"><i class="fas fa-home"></i> Volver al Inicio</a>
+        <a href="https://wa.me/5355841127?text=Hola,%20me%20gustaría%20consultar%20sobre%20un%20tema%20diferente%20a%20los%20productos%20mostrados%20en%20la%20página.%20¿Podríamos%20conversar%20al%20respecto?" class="consult-button" target="_blank">
+          <i class="fab fa-whatsapp"></i> Consulta Externa
+        </a>
+      </div>
+    </div>
+
+    <div class="productos">
+      <div class="producto">
+        <img src="images/mercado/azucar.jpg" alt="Azúcar" class="producto-imagen">
+        <div class="producto-nombre">AZÚCAR</div>
+        <div class="producto-unidad">1 Lb</div>
+        <div class="producto-precio">$310</div>
+        <div class="producto-descripcion">Azúcar refinada de alta calidad, ideal para repostería y uso diario.</div>
+        <button onclick="addToCart('AZÚCAR', 310, '1 Lb')" class="add-to-cart">
+          <i class="fas fa-cart-plus"></i> Añadir al Carrito
+        </button>
+      </div>
+      
+      <div class="producto">
+        <img src="images/mercado/arroz.jpg" alt="Arroz" class="producto-imagen">
+        <div class="producto-nombre">ARROZ</div>
+        <div class="producto-unidad">1 KG</div>
+        <div class="producto-precio">$675</div>
+        <div class="producto-descripcion">Arroz de grano largo, 100% natural. Excelente rendimiento y sabor.</div>
+        <button onclick="addToCart('ARROZ', 675, '1 KG')" class="add-to-cart">
+          <i class="fas fa-cart-plus"></i> Añadir al Carrito
+        </button>
+      </div>
+      
+      <div class="producto">
+        <img src="images/mercado/azucar.jpg" alt="Azúcar" class="producto-imagen">
+        <div class="producto-nombre">AZÚCAR</div>
+        <div class="producto-unidad">1 KG</div>
+        <div class="producto-precio">$700</div>
+        <div class="producto-descripcion">Azúcar refinada de alta calidad, ideal para repostería y uso diario. Presentación de 1 kg.</div>
+        <button onclick="addToCart('AZÚCAR', 700, '1 KG')" class="add-to-cart">
+          <i class="fas fa-cart-plus"></i> Añadir al Carrito
+        </button>
+      </div>
+      
+      <div class="producto">
+        <img src="images/mercado/aceite.jpg" alt="Aceite" class="producto-imagen">
+        <div class="producto-nombre">ACEITE</div>
+        <div class="producto-unidad">900 ML</div>
+        <div class="producto-precio">$710</div>
+        <div class="producto-descripcion">Aceite de alta calidad, ideal para cocinar y preparar platos saludables.</div>
+        <button onclick="addToCart('ACEITE', 710, '900 ML')" class="add-to-cart">
+          <i class="fas fa-cart-plus"></i> Añadir al Carrito
+        </button>
+      </div>
+      
+     <div class="producto">
+        <img src="images/mercado/leche-entera.jpg" alt="Leche Entera" class="producto-imagen">
+        <div class="producto-nombre">LECHE ENTERA DESCREMADA</div>
+        <div class="producto-unidad">1 KG</div>
+        <div class="producto-precio">$1,650</div>
+        <div class="producto-descripcion">Leche entera descremada de alta calidad, ideal para consumo diario.</div>
+        <button onclick="addToCart('LECHE ENTERA DESCREMADA', 1650, '1 KG')" class="add-to-cart">
+          <i class="fas fa-cart-plus"></i> Añadir al Carrito
+        </button>
+      </div>
+      
+      <div class="producto">
+        <img src="images/mercado/cafe-el-morro.jpg" alt="Café El Morro" class="producto-imagen">
+        <div class="producto-nombre">CAFÉ EL MORRO</div>
+        <div class="producto-unidad">1 Unidad</div>
+        <div class="producto-precio">$1,600</div>
+        <div class="producto-descripcion">Café de alta calidad, elaborado con granos seleccionados. Presentación de 1 unidad.</div>
+        <button onclick="addToCart('CAFÉ EL MORRO', 1600, '1 Unidad')" class="add-to-cart">
+          <i class="fas fa-cart-plus"></i> Añadir al Carrito
+        </button>
+      </div>
+
+      <div class="producto">
+        <img src="images/mercado/cafe-aroma.jpg" alt="Café Aroma" class="producto-imagen">
+        <div class="producto-nombre">CAFÉ AROMA</div>
+        <div class="producto-unidad">1 Unidad</div>
+        <div class="producto-precio">$1,600</div>
+        <div class="producto-descripcion">Café de alta calidad, con un aroma intenso y sabor único. Presentación de 1 unidad.</div>
+        <button onclick="addToCart('CAFÉ AROMA', 1600, '1 Unidad')" class="add-to-cart">
+          <i class="fas fa-cart-plus"></i> Añadir al Carrito
+        </button>
+      </div>
+      
+      <div class="producto">
+        <img src="images/mercado/cafe-sello-rojo.jpg" alt="Café Sello Rojo" class="producto-imagen">
+        <div class="producto-nombre">CAFÉ SELLO ROJO</div>
+        <div class="producto-unidad">1 Unidad</div>
+        <div class="producto-precio">$1,750</div>
+        <div class="producto-descripcion">Café de alta calidad, con un sello rojo que garantiza su calidad y sabor. Presentación de 1 unidad.</div>
+        <button onclick="addToCart('CAFÉ SELLO ROJO', 1750, '1 Unidad')" class="add-to-cart">
+          <i class="fas fa-cart-plus"></i> Añadir al Carrito
+        </button>
+      </div>
+      
+      <div class="producto">
+        <img src="images/mercado/spaghetti.jpg" alt="Spaghetti" class="producto-imagen">
+        <div class="producto-nombre">SPAGHETTI</div>
+        <div class="producto-unidad">500 GR</div>
+        <div class="producto-precio">$270</div>
+        <div class="producto-descripcion">Espagueti de alta calidad, ideal para preparar platos de pasta. Presentación de 500 gr.</div>
+        <button onclick="addToCart('SPAGHETTI', 270, '500 GR')" class="add-to-cart">
+          <i class="fas fa-cart-plus"></i> Añadir al Carrito
+        </button>
+      </div>
+      
+      <div class="producto">
+        <img src="images/mercado/sal.jpg" alt="Sal" class="producto-imagen">
+        <div class="producto-nombre">SAL</div>
+        <div class="producto-unidad">1 Lb</div>
+        <div class="producto-precio">$60</div>
+        <div class="producto-descripcion">Sal de alta calidad, ideal para cocinar y sazonar platos.</div>
+        <button onclick="addToCart('SAL', 60, '1 Lb')" class="add-to-cart">
+          <i class="fas fa-cart-plus"></i> Añadir al Carrito
+        </button>
+      </div>
+      
+      <div class="producto">
+        <img src="images/mercado/galletas-crokantinas.jpg" alt="Galletas Crokantinas" class="producto-imagen">
+        <div class="producto-nombre">GALLETAS CROKANTINAS</div>
+        <div class="producto-unidad">Pack de 7</div>
+        <div class="producto-precio">$1,050</div>
+        <div class="producto-descripcion">Galletas crokantinas de alta calidad, ideales para merendar o como acompañamiento. Pack de 7 unidades.</div>
+        <button onclick="addToCart('GALLETAS CROKANTINAS', 1050, 'Pack de 7')" class="add-to-cart">
+          <i class="fas fa-cart-plus"></i> Añadir al Carrito
+        </button>
+      </div>
+      
+      <div class="producto">
+        <img src="images/mercado/galletas-crokantinas.jpg" alt="Galletas Crokantinas" class="producto-imagen">
+        <div class="producto-nombre">GALLETAS CROKANTINAS</div>
+        <div class="producto-unidad">1 Unidad</div>
+        <div class="producto-precio">$160</div>
+        <div class="producto-descripcion">Galletas crokantinas de alta calidad, ideales para merendar o como acompañamiento. Presentación de 1 unidad.</div>
+        <button onclick="addToCart('GALLETAS CROKANTINAS', 160, '1 Unidad')" class="add-to-cart">
+          <i class="fas fa-cart-plus"></i> Añadir al Carrito
+        </button>
+      </div>
+      
+      <div class="producto">
+        <img src="images/mercado/leche-condensada.jpg" alt="Leche Condensada" class="producto-imagen">
+        <div class="producto-nombre">LECHE CONDENSADA</div>
+        <div class="producto-unidad">1 Unidad</div>
+        <div class="producto-precio">$450</div>
+        <div class="producto-descripcion">Leche condensada de alta calidad, ideal para preparar postres y dulces. Presentación de 1 unidad.</div>
+        <button onclick="addToCart('LECHE CONDENSADA', 450, '1 Unidad')" class="add-to-cart">
+          <i class="fas fa-cart-plus"></i> Añadir al Carrito
+        </button>
+      </div>
+
+      <div class="producto">
+        <img src="images/mercado/pasta-de-tomate.jpg" alt="Pasta de Tomate" class="producto-imagen">
+        <div class="producto-nombre">PASTA DE TOMATE</div>
+        <div class="producto-unidad">1 Unidad</div>
+        <div class="producto-precio">$470</div>
+        <div class="producto-descripcion">Pasta de tomate de alta calidad, ideal para preparar salsas y platos de pasta. Presentación de 1 unidad.</div>
+        <button onclick="addToCart('PASTA DE TOMATE', 470, '1 Unidad')" class="add-to-cart">
+          <i class="fas fa-cart-plus"></i> Añadir al Carrito
+        </button>
+      </div>
+      
+      <div class="producto">
+        <img src="images/mercado/nutella.jpg" alt="Nutella" class="producto-imagen">
+        <div class="producto-nombre">NUTELA</div>
+        <div class="producto-unidad">1 Unidad</div>
+        <div class="producto-precio">$1,000</div>
+        <div class="producto-descripcion">Nutella de alta calidad, ideal para preparar postres y dulces. Presentación de 1 unidad.</div>
+        <button onclick="addToCart('NUTELA', 1000, '1 Unidad')" class="add-to-cart">
+          <i class="fas fa-cart-plus"></i> Añadir al Carrito
+        </button>
+      </div>
+      
+      <div class="producto">
+        <img src="images/mercado/refresco-de-lata.jpg" alt="Refresco de Lata" class="producto-imagen">
+        <div class="producto-nombre">REFRESCO DE LATA</div>
+        <div class="producto-unidad">1 Unidad</div>
+        <div class="producto-precio">$190</div>
+        <div class="producto-descripcion">Refresco de lata de alta calidad, ideal para beber fresco y refrescante. Presentación de 1 unidad.</div>
+        <button onclick="addToCart('REFRESCO DE LATA', 190, '1 Unidad')" class="add-to-cart">
+          <i class="fas fa-cart-plus"></i> Añadir al Carrito
+        </button>
+      </div>
+      
+      <div class="producto">
+        <img src="images/mercado/todo-sazon.jpg" alt="Todo Sazón" class="producto-imagen">
+        <div class="producto-nombre">TODO SAZÓN MOLIDO EN ACEITE</div>
+        <div class="producto-unidad">1 Unidad</div>
+        <div class="producto-precio">$730</div>
+        <div class="producto-descripcion">Todo sazón molido en aceite de alta calidad, ideal para sazonar platos y darles sabor. Presentación de 1 unidad.</div>
+        <button onclick="addToCart('TODO SAZÓN MOLIDO EN ACEITE', 730, '1 Unidad')" class="add-to-cart">
+          <i class="fas fa-cart-plus"></i> Añadir al Carrito
+        </button>
+      </div>
+      
+      <div class="producto">
+        <img src="images/mercado/aji-cachucha.jpg" alt="Ají Cachucha" class="producto-imagen">
+        <div class="producto-nombre">AJÍ CACHUCHA MOLIDO EN ACEITE</div>
+        <div class="producto-unidad">1 Unidad</div>
+        <div class="producto-precio">$500</div>
+        <div class="producto-descripcion">Ají cachucha molido en aceite de alta calidad, ideal para sazonar platos y darles sabor. Presentación de 1 unidad.</div>
+        <button onclick="addToCart('AJÍ CACHUCHA MOLIDO EN ACEITE', 500, '1 Unidad')" class="add-to-cart">
+          <i class="fas fa-cart-plus"></i> Añadir al Carrito
+        </button>
+      </div>
+      
+      <div class="producto">
+        <img src="images/mercado/jugo.jpg" alt="Jugo" class="producto-imagen">
+        <div class="producto-nombre">JUGO</div>
+        <div class="producto-unidad">1 LT</div>
+        <div class="producto-precio">$550</div>
+        <div class="producto-descripcion">Jugo de alta calidad, ideal para beber fresco y saludable. Presentación de 1 litro.</div>
+        <button onclick="addToCart('JUGO', 550, '1 LT')" class="add-to-cart">
+          <i class="fas fa-cart-plus"></i> Añadir al Carrito
+        </button>
+      </div>
+      
+      <div class="producto">
+        <img src="images/mercado/freegells.jpg" alt="Freegells" class="producto-imagen">
+        <div class="producto-nombre">FREEGELLS O MENTA PLUS</div>
+        <div class="producto-unidad">1 Unidad</div>
+        <div class="producto-precio">$100</div>
+        <div class="producto-descripcion">Freegells o menta plus de alta calidad, ideal para refrescar y dar frescura. Presentación de 1 unidad.</div>
+        <button onclick="addToCart('FREEGELLS O MENTA PLUS', 100, '1 Unidad')" class="add-to-cart">
+          <i class="fas fa-cart-plus"></i> Añadir al Carrito
+        </button>
+      </div>
+      
+      <div class="producto">
+        <img src="images/mercado/sazon-iberia.jpg" alt="Sazón Iberia" class="producto-imagen">
+        <div class="producto-nombre">SAZÓN IBERIA</div>
+        <div class="producto-unidad">1 Unidad</div>
+        <div class="producto-precio">$60</div>
+        <div class="producto-descripcion">Sazón Iberia para realzar el sabor de tus comidas.</div>
+        <button onclick="addToCart('SAZÓN IBERIA', 60, '1 Unidad')" class="add-to-cart">
+          <i class="fas fa-cart-plus"></i> Añadir al Carrito
+        </button>
+      </div>
+
+      <div class="producto">
+        <img src="images/mercado/sazon-tropical.jpg" alt="Sazón Tropical" class="producto-imagen">
+        <div class="producto-nombre">SAZÓN TROPICAL</div>
+        <div class="producto-unidad">1 Unidad</div>
+        <div class="producto-precio">$60</div>
+        <div class="producto-descripcion">Sazón Tropical con mezcla única de especias.</div>
+        <button onclick="addToCart('SAZÓN TROPICAL', 60, '1 Unidad')" class="add-to-cart">
+          <i class="fas fa-cart-plus"></i> Añadir al Carrito
+        </button>
+      </div>
+
+      <div class="producto">
+        <img src="images/mercado/sazon-goya.jpg" alt="Sazón Goya" class="producto-imagen">
+        <div class="producto-nombre">SAZÓN GOYA</div>
+        <div class="producto-unidad">1 Unidad</div>
+        <div class="producto-precio">$70</div>
+        <div class="producto-descripcion">Sazón Goya para dar sabor auténtico a tus platos.</div>
+        <button onclick="addToCart('SAZÓN GOYA', 70, '1 Unidad')" class="add-to-cart">
+          <i class="fas fa-cart-plus"></i> Añadir al Carrito
+        </button>
+      </div>
+    </div>
+  </div>
+  <script src="cart.js"></script>
+</body>
+</html>
