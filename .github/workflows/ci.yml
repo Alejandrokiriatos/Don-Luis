@@ -20,4 +20,5 @@ jobs:
           node-version: 22
       - run: npm install --ignore-scripts
       - run: npm run check
+      - run: node --input-type=module -e "import('./src/server.js').then(({ createServer }) => { createServer(); console.log('MCP factory OK'); })"
       - run: npm test
