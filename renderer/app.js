@@ -46,8 +46,13 @@ function setConnectionState(tunnel) {
   state.tunnel = { ...state.tunnel, ...tunnel };
   const pill = $('#connection-pill');
   const labels = { ready:'Conectado', starting:'Iniciando', stopped:'Desconectado', error:'Error' };
-  pill.className = `status-pill ${state.tunnel.status || 'stopped'}`;
-  pill.querySelector('span').textContent = labels[state.tunnel.status] || 'Desconectado';
+  const desktopConnected = Boolean(state.bootstrap?.chatgptDesktop?.connected);
+  const tunnelStatus = state.tunnel.status || 'stopped';
+  pill.className = `status-pill ${tunnelStatus === 'stopped' && desktopConnected ? 'desktop' : tunnelStatus}`;
+  pill.querySelector('span').textContent = tunnelStatus === 'ready' ? labels.ready :
+    tunnelStatus === 'starting' ? labels.starting :
+    tunnelStatus === 'error' ? labels.error :
+    desktopConnected ? 'ChatGPT configurado' : labels.stopped;
   $('#start-tunnel').disabled = ['starting','ready'].includes(state.tunnel.status);
   $('#stop-tunnel').disabled = !['starting','ready'].includes(state.tunnel.status);
 }
@@ -55,12 +60,13 @@ function renderChecklist() {
   const boot = state.bootstrap || {};
   const nodeOk = Boolean(boot.node?.available);
   const foldersOk = state.roots.length > 0;
+  const desktopOk = Boolean(boot.chatgptDesktop?.connected);
   const credentialsOk = Boolean(boot.tunnel?.credentialsSaved);
   const clientOk = Boolean(boot.tunnel?.clientInstalled);
   const entries = [
     ['check-node', nodeOk, nodeOk ? 'Correcto' : 'Pendiente'],
     ['check-folder', foldersOk, foldersOk ? 'Correcto' : 'Pendiente'],
-    ['check-tunnel', credentialsOk && clientOk, credentialsOk && clientOk ? 'Preparado' : 'Pendiente']
+    ['check-tunnel', desktopOk, desktopOk ? 'ChatGPT listo' : credentialsOk && clientOk ? 'Túnel preparado' : 'Pendiente']
   ];
   for (const [id, done, label] of entries) {
     const element = document.getElementById(id);
@@ -88,6 +94,11 @@ function renderBootstrap(boot) {
   $('#install-client-button').textContent = boot.tunnel?.clientInstalled ? 'Reinstalar / actualizar cliente' : 'Descargar e instalar cliente';
   renderRoots();
   renderChecklist();
+  $('#desktop-status').textContent = boot.chatgptDesktop?.connected ? 'Configurado' : 'No configurado';
+  $('#desktop-status').classList.toggle('connected', Boolean(boot.chatgptDesktop?.connected));
+  $('#desktop-config-path').textContent = boot.chatgptDesktop?.configPath || '~/.codex/config.toml';
+  $('#connect-desktop').textContent = boot.chatgptDesktop?.connected ? 'Actualizar conexión' : 'Conectar ChatGPT Desktop';
+  $('#disconnect-desktop').disabled = !boot.chatgptDesktop?.connected;
   setConnectionState(boot.tunnel || {status:'stopped'});
   renderLogs(boot.logs || []);
 }
@@ -133,6 +144,34 @@ $('#toggle-key').addEventListener('click', () => {
   const showing = input.type === 'text';
   input.type = showing ? 'password' : 'text';
   $('#toggle-key').textContent = showing ? 'Mostrar' : 'Ocultar';
+});
+$('#connect-desktop').addEventListener('click', async () => {
+  const button = $('#connect-desktop');
+  button.disabled = true;
+  button.textContent = 'Configurando…';
+  feedback('#tunnel-feedback', 'Registrando el servidor MCP local en la configuración de ChatGPT Desktop…');
+  try {
+    const result = await window.localBridge.connectChatGptDesktop();
+    feedback('#tunnel-feedback', `LocalBridge quedó registrado. Reinicia ChatGPT Desktop. Configuración: ${result.configPath}`, 'success');
+    toast('Conexión local configurada. Reinicia ChatGPT Desktop.', 'success');
+    await refresh();
+  } catch (error) {
+    feedback('#tunnel-feedback', error.message || 'No se pudo configurar ChatGPT Desktop.', 'error');
+    toast(error.message || 'No se pudo configurar ChatGPT Desktop.', 'error');
+  } finally {
+    button.disabled = false;
+  }
+});
+$('#disconnect-desktop').addEventListener('click', async () => {
+  if (!confirm('¿Retirar únicamente la entrada de LocalBridge de la configuración de ChatGPT? Las demás entradas se conservarán.')) return;
+  try {
+    await window.localBridge.disconnectChatGptDesktop();
+    feedback('#tunnel-feedback', 'Entrada de LocalBridge retirada. Reinicia ChatGPT Desktop para aplicar el cambio.');
+    toast('Servidor LocalBridge desconectado de ChatGPT Desktop.', 'success');
+    await refresh();
+  } catch (error) {
+    feedback('#tunnel-feedback', error.message || 'No se pudo desconectar.', 'error');
+  }
 });
 $('#save-credentials').addEventListener('click', async () => {
   feedback('#credential-feedback', 'Guardando de forma cifrada…');
