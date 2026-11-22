@@ -1,59 +1,71 @@
-# Instalación de desarrollo en Windows
+# Instalación y conexión de LocalBridge en Windows
 
-Esta guía corresponde al MVP 0.1.0. La instalación gráfica se incorporará más adelante.
+## Requisitos
 
-## 1. Preparar el proyecto
+- Windows 10/11 x64.
+- Node.js 22 o superior.
+- ChatGPT Desktop con la sección **Settings → MCP servers** habilitada para tu cuenta.
 
-Abre PowerShell:
+## Instalar desde el código fuente
 
 ```powershell
 git clone https://github.com/Alejandrokiriatos/Don-Luis.git
 cd Don-Luis
 npm install
 npm run setup
+npm start
 ```
 
-## 2. Autorizar una carpeta
+## 1. Autorizar carpetas
 
-Añade una carpeta concreta del proyecto. Evita autorizar todo `C:\\` o tu perfil completo de Windows.
+En el panel **Carpetas autorizadas**, pulsa **Añadir carpeta** y selecciona solo una carpeta de proyecto. No autorices todo el disco ni tu perfil completo.
+
+También puedes usar PowerShell:
 
 ```powershell
 node src/cli.js add-root "C:\\Users\\TU_USUARIO\\Documents\\MiProyecto"
 node src/cli.js roots
 ```
 
-Cada carpeta tendrá un ID. ChatGPT verá únicamente las raíces listadas aquí.
+## 2. Conectar ChatGPT Desktop directamente
 
-Para revocar acceso:
+1. En LocalBridge, abre **Conexión ChatGPT**.
+2. En el bloque **ChatGPT Desktop**, pulsa **Conectar ChatGPT Desktop**.
+3. LocalBridge comprobará Node.js y que exista el paquete MCP compilado.
+4. Se añadirá una entrada administrada a `%USERPROFILE%\\.codex\\config.toml`.
+5. Si ya existía el archivo, LocalBridge creará una copia de seguridad antes de cambiarlo.
+6. Reinicia ChatGPT Desktop.
+7. Abre **Settings → MCP servers** y comprueba que aparece `localbridge`.
+8. En una conversación, escribe `/mcp` para comprobar las herramientas disponibles.
 
-```powershell
-node src/cli.js remove-root ID_DE_LA_CARPETA
-```
+La configuración se comparte con el host Codex que usa ChatGPT Desktop. La conexión directa local no necesita Tunnel ID, Runtime API Key, Secure MCP Tunnel, Docker ni exponer puertos.
 
-Revocar una raíz no borra ni modifica los archivos de esa carpeta.
+Para quitar solo nuestra entrada, pulsa **Desconectar** en LocalBridge. Las demás entradas MCP del archivo se conservan y también se crea una copia de seguridad.
 
-## 3. Comprobar el servidor local
+## 3. Ruta opcional para ChatGPT web
+
+Si tu cuenta y workspace permiten agregar servidores MCP personalizados en ChatGPT web, puedes usar la sección opcional **Secure MCP Tunnel**.
+
+Necesitarás:
+- Un Tunnel ID creado en OpenAI Platform.
+- Una Runtime API Key con los permisos Tunnels Read + Use.
+- Que tu workspace permita usar servidores MCP personalizados.
+
+La aplicación descarga el cliente oficial de OpenAI, verifica el SHA-256 publicado y guarda las credenciales cifradas con el almacenamiento seguro de Windows. Para más información, consulta la [guía oficial de Secure MCP Tunnel](https://developers.openai.com/api/docs/guides/secure-mcp-tunnels).
+
+## 4. Probar el servidor MCP
 
 ```powershell
 npm run check
+npm run build:mcp
 npm test
-npm run mcp
 ```
 
-`npm run mcp` se queda esperando una conexión MCP por entrada/salida estándar. Cierra con `Ctrl+C` cuando lo hayas ejecutado manualmente.
+La conexión se considera completada solo cuando ChatGPT Desktop muestra `localbridge` en MCP servers y puede llamar con éxito a `localbridge_status`.
 
-## 4. Conectarlo con ChatGPT
+## Notas
 
-La integración requiere Secure MCP Tunnel de OpenAI. Sigue la guía oficial actual para crear el túnel, generar una clave de ejecución y asociar el túnel con el workspace de ChatGPT correcto:
-
-<https://developers.openai.com/api/docs/guides/secure-mcp-tunnels>
-
-El comando MCP que debe ejecutar el cliente del túnel es:
-
-```powershell
-node "C:\\RUTA\\A\\Don-Luis\\src\\index.js"
-```
-
-No inventes ni compartas el `tunnel_id` o la clave de ejecución en este repositorio. La configuración y los secretos deben permanecer en el equipo local.
-
-**No des por conectada la integración hasta que ChatGPT descubra las herramientas y una llamada segura a `localbridge_status` responda correctamente.**
+- Node.js debe permanecer instalado, ya que ChatGPT Desktop ejecuta el servidor MCP mediante STDIO.
+- No compartas Runtime API Keys ni archivos de credenciales.
+- El texto de los archivos que ChatGPT lea se enviará al modelo para poder procesarlo.
+- La ejecución de comandos del usuario y el borrado de archivos no están habilitados en esta versión.
