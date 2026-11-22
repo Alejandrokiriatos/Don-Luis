@@ -2,7 +2,7 @@
 
 **Conector local de archivos para ChatGPT en Windows**, construido con Node.js y MCP. LocalBridge permite que ChatGPT explore, lea, cree y modifique archivos únicamente dentro de carpetas que el usuario autorice de forma explícita.
 
-> Estado: MVP 0.1.0. El servidor MCP y el control de carpetas ya están implementados. La interfaz gráfica, el instalador de Windows y la ejecución controlada de comandos están planificados para las siguientes etapas.
+> Estado: MVP de escritorio 0.2.0. Incluye servidor MCP, panel gráfico, gestión de carpetas, almacenamiento cifrado de credenciales y descarga verificada del cliente oficial de túnel. La primera compilación instalable está en validación automatizada.
 
 ## Qué incluye esta primera versión
 
@@ -13,7 +13,7 @@
 - Copia de respaldo automática antes de reemplazar un archivo.
 - Creación de subcarpetas dentro de una carpeta autorizada.
 - Bloqueo de rutas absolutas, traversal (`..`) y enlaces simbólicos.
-- Configuración local en el perfil de Windows; las rutas autorizadas no se guardan en GitHub.
+- Panel de escritorio para Windows con resumen, gestión de carpetas, conexión y registro de actividad.\n- Almacenamiento de Tunnel ID y Runtime API Key cifrado con el almacén seguro de Windows.\n- Descarga del cliente oficial de OpenAI con comprobación SHA-256 antes de instalar.\n- Configuración local en el perfil de Windows; las rutas autorizadas no se guardan en GitHub.
 - Ejecución de comandos desactivada en esta versión.
 
 ## Requisitos
