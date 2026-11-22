@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; script-src 'self'; img-src 'self' data:; connect-src 'self';">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LocalBridge</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark"><span></span><span></span><span></span></div>
+        <div><strong>LocalBridge</strong><small>CHATGPT CONNECTOR</small></div>
+      </div>
+      <div class="workspace-label">ESPACIO DE TRABAJO</div>
+      <nav class="nav">
+        <button class="nav-item active" data-page="overview"><span class="nav-icon">⌂</span>Resumen</button>
+        <button class="nav-item" data-page="folders"><span class="nav-icon">▤</span>Carpetas autorizadas <span id="nav-root-count" class="nav-count">0</span></button>
+        <button class="nav-item" data-page="connection"><span class="nav-icon">↗</span>Conexión ChatGPT</button>
+        <button class="nav-item" data-page="activity"><span class="nav-icon">≋</span>Actividad</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="secure-note"><div class="secure-icon">✓</div><div><strong>Acceso controlado</strong><small>Solo carpetas que autorices</small></div></div>
+        <div class="version">LOCALBRIDGE <span id="app-version">v0.2.0</span></div>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <div class="breadcrumbs"><span>LocalBridge</span><b>/</b><strong id="page-heading">Resumen</strong></div>
+        <div class="topbar-right">
+          <span id="connection-pill" class="status-pill stopped"><i></i><span>Desconectado</span></span>
+          <button class="icon-button" id="refresh-button" title="Actualizar estado" aria-label="Actualizar estado">↻</button>
+        </div>
+      </header>
+
+      <div class="content">
+        <section id="page-overview" class="page active">
+          <div class="hero">
+            <div class="hero-copy">
+              <div class="eyebrow"><span class="eyebrow-dot"></span> TU ESPACIO LOCAL, BAJO TU CONTROL</div>
+              <h1>Hola. Este es tu<br><span>puente con ChatGPT.</span></h1>
+              <p>Conecta tus proyectos locales para que ChatGPT pueda explorar y trabajar con los archivos que tú autorices.</p>
+              <div class="hero-actions">
+                <button class="button primary" data-go="folders">+ Autorizar una carpeta</button>
+                <button class="button secondary" data-go="connection">Configurar conexión <span>↗</span></button>
+              </div>
+            </div>
+            <div class="hero-art" aria-hidden="true">
+              <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+              <div class="core"><div class="core-inner">LB</div></div>
+              <div class="node node-top">⌘</div><div class="node node-left">▤</div><div class="node node-right">✳</div>
+              <div class="art-label">LOCAL <span>→</span> CHATGPT</div>
+            </div>
+          </div>
+
+          <div class="section-title-row">
+            <div><div class="section-kicker">PANEL DE CONTROL</div><h2>Estado del sistema</h2></div>
+            <span class="updated-label" id="last-updated">Comprobando…</span>
+          </div>
+          <div class="stats-grid">
+            <article class="stat-card"><div class="stat-top"><span>Carpetas autorizadas</span><span class="stat-symbol folder-symbol">▤</span></div><strong id="stat-roots">0</strong><small>Espacios locales permitidos</small></article>
+            <article class="stat-card"><div class="stat-top"><span>Cliente del túnel</span><span class="stat-symbol tunnel-symbol">↗</span></div><strong id="stat-client">No instalado</strong><small id="stat-client-detail">Cliente oficial de OpenAI</small></article>
+            <article class="stat-card"><div class="stat-top"><span>Node.js</span><span class="stat-symbol node-symbol">⬡</span></div><strong id="stat-node">Detectando…</strong><small id="stat-node-detail">Requisito para el servidor local</small></article>
+            <article class="stat-card"><div class="stat-top"><span>Seguridad</span><span class="stat-symbol shield-symbol">✓</span></div><strong class="stat-good">Activa</strong><small>Acceso restringido por carpeta</small></article>
+          </div>
+
+          <div class="bottom-grid">
+            <article class="panel checklist-panel">
+              <div class="panel-heading"><div><div class="section-kicker">CONFIGURACIÓN</div><h2>Primeros pasos</h2></div><span class="mini-badge">3 pasos</span></div>
+              <div class="check-row" id="check-node"><span class="check-mark">1</span><div><strong>Comprobar Node.js</strong><small>Motor que ejecuta el servidor MCP local.</small></div><span class="check-state">Pendiente</span></div>
+              <div class="check-row" id="check-folder"><span class="check-mark">2</span><div><strong>Autorizar una carpeta</strong><small>Elige el proyecto al que ChatGPT tendrá acceso.</small></div><span class="check-state">Pendiente</span></div>
+              <div class="check-row" id="check-tunnel"><span class="check-mark">3</span><div><strong>Conectar Secure MCP Tunnel</strong><small>Usa tu Tunnel ID y Runtime API Key de OpenAI.</small></div><span class="check-state">Pendiente</span></div>
+            </article>
+            <article class="panel quick-panel">
+              <div class="panel-heading"><div><div class="section-kicker">ACCESO RÁPIDO</div><h2>Tus carpetas</h2></div><button class="text-button" data-go="folders">Ver todas →</button></div>
+              <div id="overview-roots" class="compact-roots"><div class="empty-state compact-empty">Todavía no has autorizado carpetas.</div></div>
+            </article>
+          </div>
+        </section>
+
+        <section id="page-folders" class="page">
+          <div class="page-intro">
+            <div><div class="section-kicker">PERMISOS LOCALES</div><h1>Carpetas autorizadas</h1><p>ChatGPT solo podrá leer o modificar contenido dentro de las carpetas que aparezcan aquí.</p></div>
+            <button class="button primary" id="add-root-button">＋ Añadir carpeta</button>
+          </div>
+          <div class="notice notice-blue"><span>ⓘ</span><div><strong>Tu privacidad empieza por aquí.</strong><p>No autorices todo el disco. Añade únicamente los proyectos que quieras trabajar con ChatGPT. Revocar una carpeta no borra sus archivos.</p></div></div>
+          <div class="list-toolbar"><div><strong id="root-total">0 carpetas</strong><span>administradas por este equipo</span></div><span class="permission-label"><i></i> Permisos locales</span></div>
+          <div id="roots-list" class="roots-grid"><div class="empty-state">No hay carpetas autorizadas todavía.</div></div>
+        </section>
+
+        <section id="page-connection" class="page">
+          <div class="page-intro">
+            <div><div class="section-kicker">CONEXIÓN SEGURA</div><h1>Conexión con ChatGPT</h1><p>LocalBridge utiliza el cliente oficial Secure MCP Tunnel de OpenAI para conectar tu servidor local sin abrir puertos de entrada.</p></div>
+            <span class="official-badge">OpenAI · Secure MCP Tunnel</span>
+          </div>
+          <div class="connection-layout">
+            <div class="panel connection-main">
+              <div class="panel-heading"><div><div class="section-kicker">CREDENCIALES DEL TÚNEL</div><h2>Datos de conexión</h2></div><span class="lock-label">⌑ Cifrado local</span></div>
+              <label class="field-label" for="tunnel-id">Tunnel ID</label>
+              <input id="tunnel-id" class="input" type="text" autocomplete="off" spellcheck="false" placeholder="tunnel_…">
+              <div class="field-help">Identificador del túnel creado en tu organización de OpenAI.</div>
+              <label class="field-label" for="runtime-key">Runtime API Key</label>
+              <div class="secret-input-wrap"><input id="runtime-key" class="input" type="password" autocomplete="new-password" placeholder="Introduce tu clave de ejecución"><button id="toggle-key" class="reveal-button" type="button">Mostrar</button></div>
+              <div class="field-help">La clave se cifra con el almacén seguro de Windows. Nunca se guarda en GitHub ni en archivos del proyecto.</div>
+              <div class="form-actions"><button id="save-credentials" class="button primary">Guardar credenciales</button><button id="clear-credentials" class="button danger-ghost">Borrar credenciales</button></div>
+              <div id="credential-feedback" class="feedback" role="status"></div>
+            </div>
+            <div class="side-stack">
+              <div class="panel install-panel">
+                <div class="section-kicker">DEPENDENCIA OFICIAL</div><h2>Cliente Secure MCP Tunnel</h2>
+                <p id="client-description">LocalBridge puede descargar la versión oficial de OpenAI y verificar su SHA-256 antes de instalarla.</p>
+                <div class="client-version" id="client-version">No instalado</div>
+                <button id="install-client-button" class="button secondary full-button">Descargar e instalar cliente</button>
+                <div class="progress-wrap" id="install-progress-wrap" hidden><div class="progress-track"><div id="install-progress-bar"></div></div><small id="install-progress-label">Preparando descarga…</small></div>
+              </div>
+              <div class="panel help-panel">
+                <div class="help-icon">↗</div><h3>¿Aún no tienes los datos?</h3>
+                <p>Abre la administración de túneles de OpenAI. Necesitas un Tunnel ID y una Runtime API Key con permisos de lectura y uso del túnel.</p>
+                <button class="text-button" id="open-tunnels">Abrir administración de túneles ↗</button>
+              </div>
+            </div>
+          </div>
+          <div class="notice notice-amber connection-warning"><span>!</span><div><strong>La conexión también depende de tu cuenta de ChatGPT.</strong><p>OpenAI debe permitir servidores MCP personalizados en el espacio de trabajo de destino. LocalBridge no puede saltarse las restricciones de plan, organización o administrador.</p></div></div>
+          <div class="connection-footer">
+            <div><strong>Servidor MCP local</strong><small>Proporciona herramientas de lectura, escritura y exploración de carpetas autorizadas.</small></div>
+            <div class="connection-controls"><button class="button secondary" id="stop-tunnel" disabled>Detener</button><button class="button primary" id="start-tunnel">Iniciar conexión</button></div>
+          </div>
+          <div id="tunnel-feedback" class="feedback" role="status"></div>
+        </section>
+
+        <section id="page-activity" class="page">
+          <div class="page-intro"><div><div class="section-kicker">REGISTRO LOCAL</div><h1>Actividad</h1><p>Eventos recientes del cliente de túnel. Las claves no se muestran en este registro.</p></div><button class="button secondary" id="clear-visible-logs">Limpiar vista</button></div>
+          <div class="panel log-panel"><div class="panel-heading"><div><div class="section-kicker">EVENTOS DEL SISTEMA</div><h2>Registro de conexión</h2></div><span class="mini-badge" id="log-count">0 eventos</span></div><div id="log-list" class="log-list"><div class="empty-state">Todavía no hay eventos registrados.</div></div></div>
+        </section>
+      </div>
+      <footer class="footer"><span>LocalBridge <b>•</b> Conector local exclusivo para ChatGPT</span><span><i class="footer-dot"></i> Tus archivos permanecen en este equipo</span></footer>
+    </main>
+  </div>
+  <div id="toast-region" class="toast-region" aria-live="polite"></div>
+  <script src="./app.js"></script>
+</body>
+</html>
