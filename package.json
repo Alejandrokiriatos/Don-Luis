@@ -16,7 +16,7 @@
     "setup": "node src/cli.js setup",
     "roots": "node src/cli.js roots",
     "test": "node --test",
-    "check": "node --check src/index.js && node --check src/server.js && node --check src/config.js && node --check src/security.js && node --check src/cli.js && node --check electron/main.js && node --check electron/preload.js && node --check renderer/app.js",
+    "check": "node --check src/index.js && node --check src/server.js && node --check src/config.js && node --check src/security.js && node --check src/cli.js && node --check electron/main.js && node --check electron/preload.cjs && node --check renderer/app.js",
     "dist:win": "npm run build:mcp && electron-builder --win nsis"
   },
   "dependencies": {
