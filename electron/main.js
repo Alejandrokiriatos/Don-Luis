@@ -352,7 +352,7 @@ function createWindow() {
     title: 'LocalBridge',
     show: false,
     webPreferences: {
-      preload: path.join(app.getAppPath(), 'electron', 'preload.js'),
+      preload: path.join(app.getAppPath(), 'electron', 'preload.cjs'),
       contextIsolation: true,
       nodeIntegration: false,
       sandbox: true
