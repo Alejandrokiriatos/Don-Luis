@@ -2,6 +2,8 @@ const { contextBridge, ipcRenderer } = require('electron');
 
 const api = {
   bootstrap: () => ipcRenderer.invoke('app:bootstrap'),
+  connectChatGptDesktop: () => ipcRenderer.invoke('chatgpt:connect-desktop'),
+  disconnectChatGptDesktop: () => ipcRenderer.invoke('chatgpt:disconnect-desktop'),
   addRoot: () => ipcRenderer.invoke('app:add-root'),
   removeRoot: id => ipcRenderer.invoke('app:remove-root', id),
   saveTunnel: credentials => ipcRenderer.invoke('tunnel:save', credentials),
