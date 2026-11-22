@@ -6,6 +6,7 @@ import { promises as fs } from 'node:fs';
 import { spawn, execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import { loadConfig, addRoot, removeRoot } from '../src/config.js';
+import { connectChatGptDesktop, disconnectChatGptDesktop, getChatGptConfigPath, isChatGptDesktopConnected } from './chatgpt-config.js';
 
 const execFileAsync = promisify(execFile);
 const APP_ID = 'com.localbridge.chatgpt';
@@ -111,11 +112,13 @@ async function getBootstrap() {
   const secrets = await readSecrets();
   const installInfo = await getInstallInfo();
   const node = await checkNode();
+  const desktopConnected = await isChatGptDesktopConnected();
   const configuredClient = installInfo.tunnelClientPath;
   const installed = Boolean(configuredClient && await fs.access(configuredClient).then(() => true).catch(() => false));
   return {
     app: { name: 'LocalBridge', version: app.getVersion(), platform: process.platform, arch: process.arch },
     roots: config.roots.map(({ id, name, path: rootPath, addedAt }) => ({ id, name, path: rootPath, addedAt })),
+    chatgptDesktop: { connected: desktopConnected, configPath: getChatGptConfigPath() },
     node,
     tunnel: {
       ...tunnelState,
@@ -313,6 +316,20 @@ function registerIpc() {
     if (typeof id !== 'string' || !/^[a-f0-9-]{6,40}$/i.test(id)) throw new Error('Identificador de carpeta inválido.');
     await removeRoot(id);
     return { removed: true };
+  });
+  ipcMain.handle('chatgpt:connect-desktop', async () => {
+    const node = await checkNode();
+    if (!node.available) throw new Error(node.message);
+    const bundlePath = getMcpBundlePath();
+    const cwd = path.dirname(path.dirname(bundlePath));
+    const result = await connectChatGptDesktop({ bundlePath, cwd });
+    addLog('Servidor MCP LocalBridge añadido a la configuración local de ChatGPT Desktop.');
+    return result;
+  });
+  ipcMain.handle('chatgpt:disconnect-desktop', async () => {
+    const result = await disconnectChatGptDesktop();
+    addLog('Se retiró la entrada administrada de LocalBridge de ChatGPT Desktop.');
+    return result;
   });
   ipcMain.handle('tunnel:save', async (_event, input) => {
     const tunnelId = String(input?.tunnelId ?? '').trim();
