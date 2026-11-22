@@ -93,8 +93,28 @@
 
         <section id="page-connection" class="page">
           <div class="page-intro">
-            <div><div class="section-kicker">CONEXIÓN SEGURA</div><h1>Conexión con ChatGPT</h1><p>LocalBridge utiliza el cliente oficial Secure MCP Tunnel de OpenAI para conectar tu servidor local sin abrir puertos de entrada.</p></div>
+            <div><div class="section-kicker">CONEXIÓN SEGURA</div><h1>Conexión con ChatGPT</h1><p>Conecta ChatGPT Desktop directamente a tu servidor MCP local. También puedes configurar Secure MCP Tunnel para usar el servidor desde ChatGPT web cuando tu cuenta lo permita.</p></div>
             <span class="official-badge">OpenAI · Secure MCP Tunnel</span>
+          </div>
+          <div class="panel desktop-connect-panel">
+            <div class="desktop-connect-top">
+              <div class="desktop-brand-mark">✳</div>
+              <div class="desktop-connect-copy">
+                <div class="section-kicker">RECOMENDADO · CONEXIÓN LOCAL</div>
+                <h2>ChatGPT Desktop</h2>
+                <p>Registra LocalBridge directamente como servidor MCP local. No necesita Tunnel ID, Runtime API Key ni abrir puertos.</p>
+              </div>
+              <span id="desktop-status" class="desktop-status">No configurado</span>
+            </div>
+            <div class="desktop-connect-bottom">
+              <div class="desktop-config-info"><strong>Configuración compartida de ChatGPT</strong><small id="desktop-config-path">~/.codex/config.toml</small></div>
+              <div class="desktop-actions"><button id="disconnect-desktop" class="button danger-ghost" disabled>Desconectar</button><button id="connect-desktop" class="button primary">Conectar ChatGPT Desktop</button></div>
+            </div>
+            <div class="desktop-note">Después de conectarlo, reinicia ChatGPT Desktop y comprueba el servidor en <b>Settings → MCP servers</b>. En el chat puedes escribir <b>/mcp</b> para ver las herramientas disponibles.</div>
+          </div>
+          <div class="optional-tunnel-heading">
+            <div><div class="section-kicker">OPCIONAL · PARA CHATGPT WEB</div><h2>Conexión mediante Secure MCP Tunnel</h2><p>Usa esta alternativa si tu cuenta y espacio de trabajo permiten conectar servidores MCP personalizados desde ChatGPT web.</p></div>
+            <span class="optional-label">Requiere permisos de OpenAI</span>
           </div>
           <div class="connection-layout">
             <div class="panel connection-main">
