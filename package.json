@@ -1,19 +1,66 @@
 {
   "name": "localbridge",
-  "version": "0.1.0",
+  "productName": "LocalBridge",
+  "version": "0.2.0",
   "private": true,
-  "description": "Conector local de archivos para ChatGPT mediante MCP y Secure MCP Tunnel de OpenAI",
+  "description": "Conector local de archivos de ChatGPT mediante MCP y Secure MCP Tunnel",
   "type": "module",
-  "engines": { "node": ">=22" },
+  "main": "electron/main.js",
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
-    "mcp": "node src/index.js",
+    "build:mcp": "esbuild src/index.js --bundle --platform=node --format=esm --target=node22 --outfile=dist/mcp-server.js",
+    "start": "npm run build:mcp && electron .",
+    "dev": "npm run start",
     "setup": "node src/cli.js setup",
     "roots": "node src/cli.js roots",
     "test": "node --test",
-    "check": "node --check src/index.js && node --check src/server.js && node --check src/config.js && node --check src/security.js && node --check src/cli.js"
+    "check": "node --check src/index.js && node --check src/server.js && node --check src/config.js && node --check src/security.js && node --check src/cli.js && node --check electron/main.js && node --check electron/preload.js && node --check electron/tunnel-service.js && node --check renderer/app.js",
+    "dist:win": "npm run build:mcp && electron-builder --win nsis"
   },
   "dependencies": {
     "@modelcontextprotocol/server": "^2.4.0",
     "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "electron": "45.4.1",
+    "electron-builder": "26.18.0",
+    "esbuild": "0.28.2"
+  },
+  "build": {
+    "appId": "com.localbridge.chatgpt",
+    "productName": "LocalBridge",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "electron/**/*",
+      "renderer/**/*",
+      "src/**/*",
+      "dist/**/*",
+      "package.json"
+    ],
+    "asar": true,
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "artifactName": "LocalBridge-Setup-${version}-win-${arch}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "LocalBridge",
+      "deleteAppDataOnUninstall": false
+    }
   }
 }
